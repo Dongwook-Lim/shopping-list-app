@@ -1,0 +1,151 @@
+:root {
+  --color-yellow: #f1c102;
+  --color-dark-white: #e0e0e0;
+  --color-light-white: #fafafa;
+  --color-red: #b71c1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: darkslategray;
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+  font-family: 'Fugaz One', cursive;
+}
+
+h3 {
+  padding: 30px 0 0 20px;
+  font-size: 21px;
+}
+
+h1 {
+  font-family: 'Saira Semi Condensed', sans-serif;
+  font-weight: 600;
+  padding: 20px;
+  margin: 0;
+  font-size: 28px;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+i {
+  font-size: 25px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.header {
+  background-color: var(--color-yellow);
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.grocery-img {
+  width: 230px;
+}
+
+.contents {
+  background-color: white;
+  border-radius: 15px;
+  transform: translateY(-15px);
+  font-family: 'Saira Semi Condensed', sans-serif;
+  padding-bottom: 20px;
+}
+
+.input__container {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.input__item {
+  width: 360px;
+  height: 45px;
+  border: 1.5px solid var(--color-dark-white);
+  border-radius: 22px;
+  outline: none;
+  font-size: 18px;
+  padding-left: 15px;
+  font-family: 'Saira Semi Condensed', sans-serif;
+}
+
+.input__item::placeholder {
+  font-family: 'Saira Semi Condensed', sans-serif;
+  color: var(--color-dark-white);
+}
+
+.add-btn {
+  position: absolute;
+  right: 33px;
+  top: 10px;
+}
+
+.add-icon {
+  transform: rotate(45deg);
+  color: var(--color-yellow);
+}
+
+.items {
+  height: 500px;
+  margin: 16px 0 0 0;
+  overflow-y: auto;
+}
+
+.items::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 360px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--color-light-white);
+  font-size: 20px;
+  padding: 0 12px 0 15px;
+  margin: 0 auto 8px auto;
+}
+
+.item__btns {
+  display: flex;
+  align-items: center;
+}
+
+.check-btn {
+  margin-right: 5px;
+  color: var(--color-dark-white);
+}
+
+.check-btn.active {
+  color: var(--color-yellow);
+}
+
+.delete-btn {
+  color: var(--color-red);
+}
