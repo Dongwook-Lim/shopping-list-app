@@ -59,7 +59,6 @@ function createItem(text) {
   deleteBtn.addEventListener('click', () => {
     item.remove();
     itemsArray.splice(itemsArray.indexOf(item), 1);
-    console.log(itemsArray);
   });
 
   btnsContainer.appendChild(checkBtn);
