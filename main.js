@@ -30,6 +30,22 @@ function displayItems(array) {
 function createItem(text) {
   const item = document.createElement('li');
   item.setAttribute('class', 'item');
+  item.addEventListener('click', (event) => {
+    if (event.target.parentNode === checkBtn) {
+      checkBtn.classList.toggle('active');
+      itemsArray.splice(
+        itemsArray.length - 1,
+        0,
+        itemsArray.splice(itemsArray.indexOf(item), 1)[0]
+      );
+      displayItems(itemsArray);
+    } else if (event.target.parentNode === deleteBtn) {
+      item.remove();
+      itemsArray.splice(itemsArray.indexOf(item), 1);
+    } else {
+      return;
+    }
+  });
 
   const name = document.createElement('span');
   name.innerText = text;
@@ -43,23 +59,10 @@ function createItem(text) {
   const checkBtn = document.createElement('button');
   checkBtn.setAttribute('class', 'check-btn');
   checkBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-  checkBtn.addEventListener('click', () => {
-    checkBtn.classList.toggle('active');
-    itemsArray.splice(
-      itemsArray.length - 1,
-      0,
-      itemsArray.splice(itemsArray.indexOf(item), 1)[0]
-    );
-    displayItems(itemsArray);
-  });
 
   const deleteBtn = document.createElement('button');
   deleteBtn.setAttribute('class', 'delete-btn');
   deleteBtn.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
-  deleteBtn.addEventListener('click', () => {
-    item.remove();
-    itemsArray.splice(itemsArray.indexOf(item), 1);
-  });
 
   btnsContainer.appendChild(checkBtn);
   btnsContainer.appendChild(deleteBtn);
