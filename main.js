@@ -2,7 +2,9 @@ const input = document.querySelector('.input__item');
 const items = document.querySelector('.items');
 const addBtn = document.querySelector('.add-btn');
 
-const itemsArray = [];
+let itemsArray = [];
+
+let id = 0; //UUID
 
 function onAdd() {
   // 1. get the text from input
@@ -28,46 +30,22 @@ function displayItems(array) {
 }
 
 function createItem(text) {
-  const item = document.createElement('li');
-  item.setAttribute('class', 'item');
-  item.addEventListener('click', (event) => {
-    if (event.target.parentNode === checkBtn) {
-      checkBtn.classList.toggle('active');
-      itemsArray.splice(
-        itemsArray.length - 1,
-        0,
-        itemsArray.splice(itemsArray.indexOf(item), 1)[0]
-      );
-      displayItems(itemsArray);
-    } else if (event.target.parentNode === deleteBtn) {
-      item.remove();
-      itemsArray.splice(itemsArray.indexOf(item), 1);
-    } else {
-      return;
-    }
-  });
-
-  const name = document.createElement('span');
-  name.innerText = text;
-
-  const btnsContainer = document.createElement('div');
-  btnsContainer.setAttribute('class', 'item__btns');
-
-  item.appendChild(name);
-  item.appendChild(btnsContainer);
-
-  const checkBtn = document.createElement('button');
-  checkBtn.setAttribute('class', 'check-btn');
-  checkBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-
-  const deleteBtn = document.createElement('button');
-  deleteBtn.setAttribute('class', 'delete-btn');
-  deleteBtn.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
-
-  btnsContainer.appendChild(checkBtn);
-  btnsContainer.appendChild(deleteBtn);
-
-  return item;
+  const itemRow = document.createElement('li');
+  itemRow.setAttribute('class', 'item');
+  itemRow.setAttribute('data-id', id);
+  itemRow.innerHTML = `
+    <span>${text}</span>
+    <div class="item__btns">
+      <button class="check-btn">
+        <i class="fa-solid fa-circle-check" data-id="${id}"></i>
+      </button>
+      <button class='delete-btn'>
+        <i class="fa-solid fa-circle-xmark" data-id="${id}"></i>
+      </button>
+    </div>
+  `;
+  id++;
+  return itemRow;
 }
 
 addBtn.addEventListener('click', onAdd);
@@ -75,5 +53,25 @@ addBtn.addEventListener('click', onAdd);
 input.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     onAdd();
+  }
+});
+
+items.addEventListener('click', (event) => {
+  const selectedId = event.target.dataset.id;
+  const selectedBtn = event.target.parentNode;
+  const selectedItem = document.querySelector(`.item[data-id='${selectedId}']`);
+  if (selectedBtn.className === 'check-btn') {
+    selectedBtn.classList.toggle('active');
+    itemsArray.splice(
+      itemsArray.length - 1,
+      0,
+      itemsArray.splice(itemsArray.indexOf(selectedItem), 1)[0]
+    );
+    displayItems(itemsArray);
+  } else if (selectedBtn.className === 'delete-btn') {
+    selectedItem.remove();
+    itemsArray.splice(itemsArray.indexOf(selectedItem), 1);
+  } else {
+    return;
   }
 });
