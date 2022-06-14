@@ -1,4 +1,5 @@
 const input = document.querySelector('.input__item');
+const form = document.querySelector('.new-form');
 const items = document.querySelector('.items');
 const addBtn = document.querySelector('.add-btn');
 
@@ -48,12 +49,9 @@ function createItem(text) {
   return itemRow;
 }
 
-addBtn.addEventListener('click', onAdd);
-
-input.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') {
-    onAdd();
-  }
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  onAdd();
 });
 
 items.addEventListener('click', (event) => {
